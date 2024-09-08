@@ -1,4 +1,3 @@
-"use client"
 import FromAirplaineImage from "../../../assets/images/fromAirplane.png";
 import ToAirplaineImage from "../../../assets/images/toAirplane.png";
 import personImage from "../../../assets/images/person.png";
@@ -48,6 +47,15 @@ export default function SearchSection() {
           ToWhereFlight: toLocation.name,
           DateFlight: takeDate,
           PersonsFlight: personCount,
+          PickedFlight: {
+            img: '',
+            companyTitle: '',
+            travelTime: '',
+            price: 0,
+            duration: '',
+            stop: '',
+            stopTime: '',
+          },
         })
       );
       navigate("/flight");
