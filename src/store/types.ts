@@ -5,6 +5,7 @@ export interface FlightStateTypes {
     DateFlight: number;
     PersonsFlight: number;
     PickedFlight: DepartingFlightsArrType;
+    Seat: string
 };
 
 export interface FlightTypes {

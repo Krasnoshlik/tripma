@@ -16,6 +16,7 @@ const initialState: FlightStateTypes = {
       stop: '',
       stopTime: '',
     },
+    Seat: ''
   };
 
 const flightSlice = createSlice({
@@ -36,10 +37,13 @@ const flightSlice = createSlice({
             state.PickedFlight.duration = action.payload.duration;
             state.PickedFlight.stop = action.payload.stop;
             state.PickedFlight.stopTime = action.payload.stopTime;
+        },
+        setSeat(state, action: PayloadAction<string>) {
+            state.Seat = action.payload;
         }
     }
 });
 
-export const { setFlight, setPickedFlight } = flightSlice.actions;
+export const { setFlight, setPickedFlight, setSeat } = flightSlice.actions;
 
 export default flightSlice.reducer;
