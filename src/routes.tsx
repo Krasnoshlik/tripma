@@ -5,6 +5,7 @@ import MainLayout from './components/MainLayout';
 import Flight from './pages/Flight/Flight';
 import PassengerInformation from './pages/PassengerInformation/PassengerInformation';
 import SelectYourSeat from './pages/SelectYourSeat/SelectYourSeat';
+import PayAndConfirm from './pages/PayAndConfirm/PayAndConfirm';
 
 const AppRoutes: React.FC = () => {
     return (
@@ -15,6 +16,7 @@ const AppRoutes: React.FC = () => {
                     <Route path="/flight" element={<Flight />} />
                     <Route path="/flight/passenger-Information" element={<PassengerInformation />} />
                     <Route path="/flight/airplane-seat" element={<SelectYourSeat />} />
+                    <Route path='/flight/airplane-seat/pay-and-confirm' element={<PayAndConfirm/>} />
                 </Routes>
             </MainLayout>
         </Router>
