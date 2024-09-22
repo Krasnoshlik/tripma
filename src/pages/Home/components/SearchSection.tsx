@@ -12,40 +12,46 @@ import { useNavigate } from "react-router-dom";
 export default function SearchSection() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dateToday = new Date();
 
   // State with proper types
   const [personCount, setPersonCount] = useState<number>(1);
   const [fromLocation, setFromLocation] = useState<FlightTypes | null>(null);
   const [toLocation, setToLocation] = useState<FlightTypes | null>(null);
-  const [takeDate, setTakedate] = useState<number | null>(null);
+  const [takeDate, setTakeDate] = useState<number | Date>(dateToday);
+  const [errorsOnSubmit, setErrorsOnSubmit] = useState<string[]>([]);
 
   // Handle selecting the "From" location
   const handleFromSelect = (item: FlightTypes) => {
     setFromLocation(item);
+    setErrorsOnSubmit((prev) => prev.filter((error) => error !== 'From'));
   };
 
   // Handle selecting the "To" location
   const handleToSelect = (item: FlightTypes) => {
     setToLocation(item);
+    setErrorsOnSubmit((prev) => prev.filter((error) => error !== 'Where'));
   };
 
-  // Function to log missing fields
-  function HandleAllFieldsFull(a: FlightTypes | null, b: FlightTypes | null, c: number | null): void {
-    if (a === null) console.log("From where not inputted!");
-    if (b === null) console.log("Where to not inputted!");
-    if (c === null) console.log("Please enter the date!");
-  }
+  // Function to validate fields
+  const validateFields = () => {
+    const errors: string[] = [];
+    if (fromLocation === null) errors.push('From');
+    if (toLocation === null) errors.push('Where');
+    if (takeDate < dateToday) errors.push('Date');
+
+    setErrorsOnSubmit(errors);
+    return errors.length === 0;
+  };
 
   // Function to handle searching the flight
-  function handleSearchFlight(): void {
-    if (fromLocation === null || toLocation === null || takeDate === null) {
-      HandleAllFieldsFull(fromLocation, toLocation, takeDate);
-    } else {
+  const handleSearchFlight = () => {
+    if (validateFields() && fromLocation && toLocation) {
       dispatch(
         setFlight({
           FromWhereFlight: fromLocation.name,
           ToWhereFlight: toLocation.name,
-          DateFlight: takeDate,
+          DateFlight: +takeDate,
           PersonsFlight: personCount,
           PickedFlight: {
             img: '',
@@ -56,11 +62,12 @@ export default function SearchSection() {
             stop: '',
             stopTime: '',
           },
+          Seat: '',
         })
       );
       navigate("/flight");
     }
-  }
+  };
 
   const commonInputStyle = {
     padding: "0px",
@@ -115,10 +122,15 @@ export default function SearchSection() {
                 fuseOptions={{ keys: ["name", "abr"] }}
                 resultStringKeyName="name"
                 showIcon={false}
-                styling={{
-                  ...commonInputStyle,
-                }}
+                styling={commonInputStyle}
               />
+              {errorsOnSubmit.includes('From') && (
+                <div className=" relative">
+                  <div className=" absolute -z-40">
+                  <p className="text-red-500">Choose from where to travel</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -137,10 +149,15 @@ export default function SearchSection() {
                 fuseOptions={{ keys: ["name", "abr"] }}
                 resultStringKeyName="name"
                 showIcon={false}
-                styling={{
-                  ...commonInputStyle,
-                }}
+                styling={commonInputStyle}
               />
+              {errorsOnSubmit.includes('Where') && (
+                <div className=" relative">
+                  <div className=" absolute -z-40">
+                <p className="text-red-500">Choose where to travel</p>
+                </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -152,8 +169,15 @@ export default function SearchSection() {
               id="date"
               className="py-2 px-4 outline-none border-x border-gray-200 text-light-grey"
               defaultValue={new Date().toISOString().slice(0, 10)}
-              onChange={(e) => setTakedate(Number(new Date(e.target.value).getTime()))}
+              onChange={(e) => setTakeDate(new Date(e.target.value))}
             />
+            {errorsOnSubmit.includes('Date') && (
+              <div className=" relative -left-[200px] top-[22px]">
+                  <div className=" absolute w-[200px]">
+              <p className="text-red-500">Choose a valid date</p>
+              </div>
+              </div>
+            )}
           </div>
 
           {/* Person count input */}
@@ -165,18 +189,14 @@ export default function SearchSection() {
             />
             <div className="flex gap-1 items-center">
               <button
-                onClick={() =>
-                  setPersonCount(personCount > 1 ? personCount - 1 : 1)
-                }
+                onClick={() => setPersonCount(personCount > 1 ? personCount - 1 : 1)}
                 className="bg-mainC text-white w-[20px] h-[20px] flex items-center justify-center rounded-lg"
               >
                 -
               </button>
               <p className="text-lg font-bold text-mainC">{personCount}</p>
               <button
-                onClick={() =>
-                  setPersonCount(personCount < 9 ? personCount + 1 : personCount)
-                }
+                onClick={() => setPersonCount(personCount < 9 ? personCount + 1 : personCount)}
                 className="bg-mainC text-white w-[20px] h-[20px] flex items-center justify-center rounded-lg"
               >
                 +
