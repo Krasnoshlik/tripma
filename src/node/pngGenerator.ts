@@ -37,7 +37,7 @@ export default function GenerateTicketPng(passenger: PassengerStateType, flight:
       ctx.fillText(`From: ${flight.FromWhereFlight}`, 30, 330);
       ctx.fillText(`To: ${flight.ToWhereFlight}`, 30, 360);
       ctx.fillText(`Date: ${new Date(flight.DateFlight).toLocaleDateString()}`, 30, 390);
-      ctx.fillText(`Persons: ${flight.PersonsFlight}`, 30, 410);
+      ctx.fillText(`Seat: ${flight.Seat}`, 30, 420);
 
       ctx.beginPath();
       ctx.moveTo(20, 260);

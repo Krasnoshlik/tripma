@@ -9,6 +9,7 @@ export interface FlightStateTypes {
 };
 
 export interface FlightTypes {
+    id?: string;
     name: string;
     abr: string;
 };

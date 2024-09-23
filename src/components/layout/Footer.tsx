@@ -53,17 +53,27 @@ const Footer: React.FC = () => {
                 <Link to='/'>Tripma for iOS</Link>
                 <Link to='/'>Mobile site</Link>
 
+                <Link to='/'>
                 <img src={AppStoreImage} alt="app store" />
+                </Link>
+                <Link to='/'>
                 <img src={GooglePlayIMage} alt="google play" />
+                </Link>
             </div>
             
             </div>
 
             <div className=' flex justify-between border-t mt-10 py-10'>
                 <div className=' flex gap-5'>
+                <Link to='/'>
                     <img src={FacebookImage} alt="facebook"/>
+                    </Link>
+                    <Link to='/'>
                     <img src={InstagramImage} alt="instagram"/>
+                    </Link>
+                    <Link to='/'>
                     <img src={TwitterImage} alt="twitter"/>
+                    </Link>
                 </div>
 
                 <p className=' text-light-grey'>© 2020 Tripma incorporated</p>

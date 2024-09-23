@@ -1,4 +1,3 @@
-import React from 'react';
 import MainSection from './components/MainSection';
 
 export default function Flight() {

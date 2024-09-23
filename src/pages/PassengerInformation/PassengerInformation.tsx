@@ -4,6 +4,9 @@ import { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { setPassengerSlice } from "../../store/slices/passengerSlice";
 import { useNavigate } from "react-router";
+import { useUser } from '@clerk/clerk-react';
+import { doc, setDoc } from "firebase/firestore"; 
+import { db } from '../../firebaseConfig'
 
 export default function PersonInformation() {
   const dispatch = useDispatch();
@@ -25,6 +28,7 @@ export default function PersonInformation() {
   const [emergencyLastName, setEmergencyLastName] = useState("");
   const [emergencyEmail, setEmergencyEmail] = useState("");
   const [emergencyPhoneNumber, setEmergencyPhoneNumber] = useState("");
+  const { isSignedIn, user } = useUser();
 
   // Checkbox state for autofill
   const [autofillEmergencyContact, setAutofillEmergencyContact] = useState(false);
@@ -101,19 +105,48 @@ export default function PersonInformation() {
     }
   };
 
-  // Handle autofill checkbox change
+  const handleSaveInformationOnAccount = async () => {
+    if (validateForm() && user) {
+      try {
+        const userDocRef = doc(db, "users", user.id);
+        await setDoc(userDocRef, {
+          firstName,
+          middleName,
+          lastName,
+          suffix,
+          birthDate: dateOfBirth,
+          email,
+          phoneNumber,
+          redressNumber,
+          knownTravelerNumber,
+          emergencyContact: {
+            firstName: emergencyFirstName,
+            lastName: emergencyLastName,
+            email: emergencyEmail,
+            phoneNumber: emergencyPhoneNumber,
+          }
+        }, { merge: true });
+  
+        console.log("User information saved successfully!");
+      } catch (error) {
+        console.error("Error saving user information:", error);
+      }
+    } else {
+      console.log("Validation failed or user is not signed in. Please check the required fields.");
+    }
+  };
+
+
   const handleAutofillChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const isChecked = e.target.checked;
     setAutofillEmergencyContact(isChecked);
 
-    // If checked, autofill emergency contact with passenger info
     if (isChecked) {
       setEmergencyFirstName(firstName);
       setEmergencyLastName(lastName);
       setEmergencyEmail(email);
       setEmergencyPhoneNumber(phoneNumber);
     } else {
-      // If unchecked, clear the emergency contact info
       setEmergencyFirstName("");
       setEmergencyLastName("");
       setEmergencyEmail("");
@@ -320,6 +353,13 @@ export default function PersonInformation() {
                 +
               </button>
             </div>
+
+            {isSignedIn && (
+            <button className=" border border-mainC rounded self-start p-2 mt-5 bg-gradient-to-r from-emerald-50 to-purple-50"
+            onClick={handleSaveInformationOnAccount}
+            >
+              Save information on account
+            </button>)}
           </div>
         </div>
 

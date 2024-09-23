@@ -1,4 +1,3 @@
-import React from 'react';
 import { ExploreNewAdventuresArr, ExploreNewPlacessArr } from '../../../../data/exploreNew';
 
 export default function ExploreNewSection() {

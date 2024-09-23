@@ -1,50 +1,64 @@
 import FromAirplaineImage from "../../../assets/images/fromAirplane.png";
 import ToAirplaineImage from "../../../assets/images/toAirplane.png";
 import personImage from "../../../assets/images/person.png";
-import { useState } from "react";
-import { flightsArr } from "../../../../data/flights";
+import { useState, useEffect } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { setFlight } from "../../../store/slices/flightSlice";
 import { useDispatch } from "react-redux";
 import { FlightTypes } from "../../../store/types";
 import { useNavigate } from "react-router-dom";
+import { db } from '../../../firebaseConfig';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default function SearchSection() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const dateToday = new Date();
 
-  // State with proper types
   const [personCount, setPersonCount] = useState<number>(1);
   const [fromLocation, setFromLocation] = useState<FlightTypes | null>(null);
   const [toLocation, setToLocation] = useState<FlightTypes | null>(null);
   const [takeDate, setTakeDate] = useState<number | Date>(dateToday);
   const [errorsOnSubmit, setErrorsOnSubmit] = useState<string[]>([]);
+  const [flightsArr, setFlightsArr] = useState<FlightTypes[]>([]);
 
-  // Handle selecting the "From" location
+  useEffect(() => {
+    const fetchFlights = async () => {
+      const querySnapshot = await getDocs(collection(db, "flights"));
+      const flights: FlightTypes[] = [];
+      querySnapshot.forEach((doc) => {
+        const flightData = doc.data() as FlightTypes;
+        flights.push({ id: doc.id, ...flightData });
+      });
+      setFlightsArr(flights);
+    };
+
+    fetchFlights();
+  }, []);
+
   const handleFromSelect = (item: FlightTypes) => {
     setFromLocation(item);
     setErrorsOnSubmit((prev) => prev.filter((error) => error !== 'From'));
   };
 
-  // Handle selecting the "To" location
   const handleToSelect = (item: FlightTypes) => {
     setToLocation(item);
     setErrorsOnSubmit((prev) => prev.filter((error) => error !== 'Where'));
   };
 
-  // Function to validate fields
   const validateFields = () => {
     const errors: string[] = [];
+    const today = dateToday.setHours(0, 0, 0, 0);
+    const selectedDate = new Date(takeDate).setHours(0, 0, 0, 0);
+  
     if (fromLocation === null) errors.push('From');
     if (toLocation === null) errors.push('Where');
-    if (takeDate < dateToday) errors.push('Date');
-
+    if (selectedDate < today) errors.push('Date');
+  
     setErrorsOnSubmit(errors);
     return errors.length === 0;
   };
 
-  // Function to handle searching the flight
   const handleSearchFlight = () => {
     if (validateFields() && fromLocation && toLocation) {
       dispatch(
@@ -91,7 +105,6 @@ export default function SearchSection() {
     borderRight: "none",
   };
 
-  // Filtered arrays to prevent selecting the same option in both inputs
   const filteredFromLocations: FlightTypes[] = flightsArr.filter(
     (flight) => flight.name !== toLocation?.name
   );
@@ -206,7 +219,7 @@ export default function SearchSection() {
 
           {/* Search button */}
           <button
-            className="h-[44px] px-4 rounded bg-mainC text-white"
+            className="h-[44px] px-4 rounded bg-mainC text-white border border-white hover:bg-white hover:text-mainC hover:border-mainC hover:shadow-lg ease-in-out duration-500"
             onClick={handleSearchFlight}
           >
             Search
