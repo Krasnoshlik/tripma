@@ -10,11 +10,13 @@ import TwitterImage from '../../assets/images/twitter.png';
 const Footer: React.FC = () => {
     return (
         <footer className=' max-w-7xl m-auto px-3'>
-            <div className=' text-light-grey flex justify-between gap-5'>
+            <div className=' text-light-grey flex flex-wrap justify-between gap-5'>
 
             <Link to="/">
             <img src={LogoImage} alt="Logo image" className=' max-w-[107px]'/>
             </Link>
+
+            <div className='w-10/12 flex flex-wrap gap-5 justify-between '>
 
             <div className=' flex flex-col gap-2'>
                 <Link to='/' className=' text-[#6E7491] font-bold'>About</Link>
@@ -59,6 +61,7 @@ const Footer: React.FC = () => {
                 <Link to='/'>
                 <img src={GooglePlayIMage} alt="google play" />
                 </Link>
+            </div>
             </div>
             
             </div>

@@ -31,7 +31,7 @@ export default function GenerateTicketPng(passenger: PassengerStateType, flight:
       ctx.fillText(`Name: ${passenger.pFirstName} ${passenger.pMiddleName} ${passenger.pLastName}`, 30, 130);
       ctx.fillText(`Birthdate: ${passenger.birthDate}`, 30, 160);
       ctx.fillText(`Email: ${passenger.pEmail}`, 30, 190);
-      ctx.fillText(`Phone: +${passenger.pPhone}`, 30, 220);
+      ctx.fillText(`Phone: ${passenger.pPhone}`, 30, 220);
 
       ctx.fillText('Flight Information:', 30, 300);
       ctx.fillText(`From: ${flight.FromWhereFlight}`, 30, 330);

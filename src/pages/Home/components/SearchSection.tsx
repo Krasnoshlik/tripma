@@ -90,12 +90,25 @@ export default function SearchSection() {
     border: "none",
     outline: "none",
     boxShadow: "none",
-    backgroundColor: "transparent",
+    backgroundColor: "white",
     color: "#7C8DB0",
     clearIconMargin: "0 2px 0 0",
     clearIconVisibility: "visible",
     searchIconMargin: "0",
     height: "42px",
+    zIndex: 1,
+    position: "relative",
+  };
+
+  const autoCompleteDropdownStyleFirst = {
+    zIndex: 9999,
+    position: "fixed",
+    backgroundColor: "#fff",
+  };
+  const autoCompleteDropdownStyleSecond = {
+    zIndex: 100,
+    position: "fixed",
+    backgroundColor: "#fff",
   };
 
   const wrapperStyle: React.CSSProperties = {
@@ -115,11 +128,11 @@ export default function SearchSection() {
   return (
     <section className="mainPage w-full h-[700px]">
       <div className="max-w-7xl m-auto flex flex-col gap-20 items-center pt-[100px] text-center">
-        <h3 className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent text-[80px] font-bold max-w-[600px] leading-[110%]">
+        <h3 className="bg-gradient-to-r from-purple-500 to-blue-500 bg-clip-text text-transparent text-[50px] clas:text-[80px] font-bold max-w-[600px] leading-[110%]">
           It's more than just a trip
         </h3>
 
-        <div className="shadow-lg rounded border border-gray-200 bg-white flex">
+        <div className="shadow-lg rounded border border-gray-200 bg-white flex flex-col items-center gap-4 pb-2 clas:pb-0 clas:flex-row">
           {/* From where autocomplete input */}
           <div style={wrapperStyle} className="flex items-center border-r">
             <img
@@ -135,7 +148,7 @@ export default function SearchSection() {
                 fuseOptions={{ keys: ["name", "abr"] }}
                 resultStringKeyName="name"
                 showIcon={false}
-                styling={commonInputStyle}
+                styling={{ ...commonInputStyle, ...autoCompleteDropdownStyleFirst }}
               />
               {errorsOnSubmit.includes('From') && (
                 <div className=" relative">
@@ -162,7 +175,7 @@ export default function SearchSection() {
                 fuseOptions={{ keys: ["name", "abr"] }}
                 resultStringKeyName="name"
                 showIcon={false}
-                styling={commonInputStyle}
+                styling={{ ...commonInputStyle, ...autoCompleteDropdownStyleSecond }}
               />
               {errorsOnSubmit.includes('Where') && (
                 <div className=" relative">
@@ -192,6 +205,8 @@ export default function SearchSection() {
               </div>
             )}
           </div>
+
+          <div className=" flex">
 
           {/* Person count input */}
           <div className="flex items-center px-2">
@@ -224,6 +239,8 @@ export default function SearchSection() {
           >
             Search
           </button>
+
+          </div>
         </div>
       </div>
     </section>

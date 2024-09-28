@@ -150,7 +150,7 @@ export default function PayAndConfirm() {
                   <h3 className=" text-light-grey text-lg">
                     {flightState.passenger.pFirstName}{" "}
                     {flightState.passenger.pLastName}, {flightState.passenger.pEmail},
-                    +{flightState.passenger.pKnowPhone}
+                    {flightState.passenger.pKnowPhone}
                   </h3>
                 </div>
                 <div>
@@ -259,7 +259,7 @@ export default function PayAndConfirm() {
 
         <div>
           <button className=" border rounded-lg p-2 border-mainC text-mainC" onClick={handleGenerateTicket}>
-            Save info and send ticket by email
+            Download ticket
           </button>
         </div>
 

@@ -8,6 +8,9 @@ module.exports = {
         'light-grey': '#7C8DB0'
       }
     },
+    screens: {
+      'clas': '900px',
+      }
   },
   plugins: [],
 };

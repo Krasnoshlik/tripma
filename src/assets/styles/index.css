@@ -14,3 +14,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+.parent-container {
+    overflow: visible;
+  }
