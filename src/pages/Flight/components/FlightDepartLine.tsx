@@ -62,10 +62,10 @@ export default function FlightDepartLine({ e }: { e: DepartingFlightsArrType }) 
 
   return (
     <div
-      className='grid grid-cols-5 gap-5 items-center text-gray-900 hover:cursor-pointer hover:bg-slate-50 rounded-lg'
+      className='grid clas:grid-cols-5 grid-cols-3 gap-5 items-center text-gray-900 hover:cursor-pointer hover:bg-slate-50 rounded-lg'
       onClick={handleSetPickedFlight}
     >
-      <div className='flex gap-4 items-center'>
+      <div className='flex flex-col clas:flex-row gap-4 items-center'>
         <img src={e.img} alt="e image" className='w-[30px] h-[25px]' />
         <p className='text-light-grey'>{e.companyTitle}</p>
       </div>
@@ -74,12 +74,12 @@ export default function FlightDepartLine({ e }: { e: DepartingFlightsArrType }) 
 
       <p>{e.travelTime}</p>
 
-      <div>
+      <div className=''>
         <p>{e.stop}</p>
         <p className='text-light-grey'>{e.stopTime}</p>
       </div>
 
-      <p className=''>$ {e.price}</p>
+      <p className=' flex justify-end'>$ {e.price}</p>
     </div>
   );
 }

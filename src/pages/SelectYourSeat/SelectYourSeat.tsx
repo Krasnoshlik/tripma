@@ -1,27 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ArrowToRightImage from "../../assets/images/arrow-to-right.png";
-import EconomySeatsImage from "../../assets/images/EconomySeats.png";
-import BusinessSeatsImage from "../../assets/images/BusinessSeats.png";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { setSeat } from "../../store/slices/flightSlice";
 import PlaneWithSeats from "./components/PlaneWithSeats";
-
-const EconomyArr = [
-  "Built-in entertainment system",
-  "Complimentary snacks and drinks",
-  "One free carry-on and personal item",
-];
-const BuisinessArr = [
-  "Extended leg room",
-  "First two checked bags free",
-  "Priority boarding",
-  "Personalized service",
-  "Enhanced food and drink service",
-  "Seats that recline 40%",
-];
+import EconomySeats from "./components/EconomySeats";
+import BusinessSeats from "./components/BusinessSeats";
+import { motion } from "framer-motion";
 
 function convertDurationToMinutes(duration: string) {
   const hoursMatch = duration.match(/(\d+)h/);
@@ -53,7 +40,7 @@ function calculateLandingTime(
 }
 
 export default function SelectYourSeat() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const flightState = useSelector((state: RootState) => state.flight);
   const { FromWhereFlight, ToWhereFlight, DateFlight, PickedFlight } =
@@ -66,89 +53,83 @@ export default function SelectYourSeat() {
   );
 
   const [pickedSeat, setPickedSeat] = useState("");
+  const [pickedClass, setPickedClass] = useState(false);
+  const [openAirplane, setOpenAirplane] = useState(false);
 
   const handleSaveAndClose = () => {
     dispatch(setSeat(pickedSeat));
-    navigate("/flight/airplane-seat/pay-and-confirm")
+    navigate("/flight/airplane-seat/pay-and-confirm");
   };
 
+  useEffect(() => {
+    if (pickedSeat.length !== 0) {
+      setOpenAirplane(false);
+    }
+  },[pickedSeat])
+
   return (
-    <main className="max-w-7xl m-auto mt-[100px] mb-20 px-4 flex justify-between">
+    <main className="max-w-7xl m-auto mt-[100px] mb-20 px-4 flex justify-center clas:justify-between">
       {/* left plane section */}
-      <PlaneWithSeats setPickedSeat={setPickedSeat} pickedSeat={pickedSeat} />
+      <div className=" hidden clas:block clas:self-end">
+        <PlaneWithSeats setPickedSeat={setPickedSeat} pickedSeat={pickedSeat} />
+      </div>
       {/* right details section */}
       <div className="border flex flex-col">
-        <div className="w-full bg-gray-900 text-white p-5 flex">
-          <div className="flex gap-5 items-center font-medium">
-            <p className="max-w-48">{FromWhereFlight}</p>
+        <div className="w-full bg-gray-900 text-white p-5 flex flex-col clas:flex-row gap-8">
+          <div className="w-full flex gap-2 clas:gap-5 items-center font-medium justify-between">
+            <p className="max-w-48 text-sm clas:text-base">{FromWhereFlight}</p>
             <img
               src={ArrowToRightImage}
               alt="arrow right"
               className="w-[20px] h-[16px]"
             />
-            <p className="max-w-48 mr-2">{ToWhereFlight}</p>
+            <p className="max-w-48 mr-2 text-sm clas:text-base">{ToWhereFlight}</p>
           </div>
 
-          <div className="bg-mainC -my-5 px-4 flex flex-col items-center justify-center">
-            <p className=" w-max">{departure}</p>
-            <p className=" text-gray-300 text-sm self-start">Departing</p>
-          </div>
+          <div className="w-full flex bg-mainC rounded-lg py-3 justify-between">
+            <div className=" px-4 flex flex-col items-center justify-center">
+              <p className=" w-max">{departure}</p>
+              <p className=" text-gray-300 text-sm">
+                Departing
+              </p>
+            </div>
 
-          <div className="px-3 flex flex-col items-center justify-center">
-            <p className="w-max">{landing}</p>
-            <p className="text-gray-300 text-sm self-start">Arriving</p>
+            <div className=" px-3 flex flex-col items-center justify-center">
+              <p className="w-max">{landing}</p>
+              <p className="text-gray-300 text-sm ">Arriving</p>
+            </div>
           </div>
         </div>
 
         {/* seats type details section */}
-        <div className="flex justify-between p-10 text-light-grey font-medium">
-          <div className="flex flex-col gap-5 max-w-[320px]">
-            <img src={EconomySeatsImage} alt="Seats image" />
-            <h3>Economy</h3>
-            <p>
-              Rest and recharge during your flight with extended leg room,
-              personalized service, and a multi-course meal service.
-            </p>
-            <span className="w-10 h-[2px] bg-mainC rounded-xl"></span>
-            <ul>
-              {EconomyArr.map((e, i) => {
-                return (
-                  <li className="flex gap-4 items-center" key={i}>
-                    <span className="block w-[10px] h-[10px] bg-mainC rounded-full"></span>
-                    <p>{e}</p>
-                  </li>
-                );
-              })}
-            </ul>
+        <div className="flex justify-center clas:justify-between p-10 text-light-grey font-medium">
+          <div className=" clas:hidden">
+            {pickedClass ? <EconomySeats /> : <BusinessSeats show={false} />}
           </div>
+          <div className=" hidden clas:flex clas:justify-between clas:w-full">
+            <EconomySeats />
+            <BusinessSeats show={true} />
+          </div>
+        </div>
 
-          <div className="flex flex-col gap-5 max-w-[320px]">
-            <img src={BusinessSeatsImage} alt="Seats image" />
-            <div className=" flex gap-4">
-              <h3>Business class</h3>
-              <p className="bg-mainC rounded-lg text-white px-1">Selected</p>
-            </div>
-            <p>
-              Rest and recharge during your flight with extended leg room,
-              personalized service, and a multi-course meal service.
-            </p>
-            <span className="w-10 h-[2px] bg-[#5CD6C0] rounded-xl"></span>
-            <ul>
-              {BuisinessArr.map((e, i) => {
-                return (
-                  <li className="flex gap-4 items-center" key={i}>
-                    <span className="block w-[10px] h-[10px] bg-[#5CD6C0] rounded-full"></span>
-                    <p>{e}</p>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+        <div className=" self-center flex gap-5 mb-2 clas:hidden">
+          <button
+            className=" border px-2 py-1 rounded border-mainC text-mainC"
+            onClick={() => setPickedClass(true)}
+          >
+            Business class
+          </button>
+          <button
+            className=" border px-2 py-1 rounded border-mainC text-mainC"
+            onClick={() => setPickedClass(false)}
+          >
+            Economy class
+          </button>
         </div>
 
         {/* passenger details and save and close section */}
         <div className="border-t bg-[#cbd4e630] h-full py-4 px-6 flex justify-between items-center">
-          <div className="flex gap-10">
+          <div className="flex gap-2 clas:gap-10">
             <div>
               <h3 className="text-light-grey">Passenger 1</h3>
               <p className="font-semibold text-gray-600 text-lg">
@@ -166,14 +147,43 @@ export default function SelectYourSeat() {
             </div>
           </div>
 
-          <button
-            className="border px-5 py-3 rounded border-mainC text-mainC"
-            onClick={handleSaveAndClose}
-          >
-            Save and close
-          </button>
+          {pickedSeat.length !== 0 ? (
+            <button
+              className="border px-3 py-2 text-sm rounded border-mainC text-mainC"
+              onClick={handleSaveAndClose}
+            >
+              Save and close
+            </button>
+          ) : (
+            <p className=" text-mainC">Please select seat</p>
+          )}
         </div>
       </div>
+      {!openAirplane && (
+        <div className="fixed bottom-5 right-5">
+          <button
+            className="bg-mainC text-white p-3 rounded-lg"
+            onClick={() => setOpenAirplane(true)}
+          >
+            Open airplane
+          </button>
+        </div>
+      )}
+
+      {openAirplane && (
+        <motion.div
+          className="fixed bottom-0"
+          initial={{ y: "100vh" }}
+          animate={{ y: 0 }}
+          exit={{ y: "100vh" }}
+          transition={{ duration: 0.5 }}
+        >
+          <PlaneWithSeats
+            setPickedSeat={setPickedSeat}
+            pickedSeat={pickedSeat}
+          />
+        </motion.div>
+      )}
     </main>
   );
 }

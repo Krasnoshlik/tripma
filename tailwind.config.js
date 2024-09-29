@@ -10,6 +10,7 @@ module.exports = {
     },
     screens: {
       'clas': '900px',
+      'small': '600px',
       }
   },
   plugins: [],
