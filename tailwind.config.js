@@ -11,6 +11,7 @@ module.exports = {
     screens: {
       'clas': '900px',
       'small': '600px',
+      'minimal': '450px',
       }
   },
   plugins: [],

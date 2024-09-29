@@ -74,7 +74,6 @@ export default function PersonInformation() {
   
     setErrors(newErrors);
   
-    // Return true if no errors
     return !Object.values(newErrors).some((error) => error);
   };
 
@@ -155,25 +154,25 @@ export default function PersonInformation() {
   };
 
   return (
-    <main className=" max-w-7xl m-auto mt-[100px] mb-20 px-4 h-screen">
+    <main className=" max-w-7xl m-auto mt-[100px] px-4 h-screen mb-[550px] minimal:mb-20">
       <h3 className=" text-mainC font-bold text-xl">Passenger information</h3>
       <p className=" text-gray-400 max-w-[680px]">
         Enter the required information for each traveler and be sure that it
         exactly matches the government-issued ID presented at the airport.
       </p>
 
-      <section className=" flex justify-between">
+      <section className=" flex flex-col clas:flex-row justify-between">
         {/* left section/ form */}
         <div className=" flex flex-col gap-5 max-w-[660px]">
           <h3 className=" text-gray-600">Passenger 1 (Adult)</h3>
 
           {/* Passenger 1 information */}
           <div className=" flex flex-col gap-4">
-            <div className=" flex gap-6">
+            <div className=" w-full flex flex-wrap gap-6">
               <input
                 type="text"
                 placeholder="First name*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.firstName ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={firstName}
@@ -182,32 +181,32 @@ export default function PersonInformation() {
               <input
                 type="text"
                 placeholder="Middle"
-                className=" text-[#7C8DB0] border border-[#light-grey] p-2 rounded outline-none"
+                className=" text-[#7C8DB0] border border-[#light-grey] p-2 rounded outline-none w-full minimal:w-auto"
                 value={middleName}
                 onChange={(e) => setMiddleName(e.target.value)}
               />
               <input
                 type="text"
                 placeholder="Last name*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.lastName ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
               />
             </div>
-            <div className=" flex gap-6">
+            <div className=" flex flex-wrap gap-6">
               <input
                 type="text"
                 placeholder="Suffix"
-                className=" text-[#7C8DB0] border border-[#light-grey] p-2 rounded outline-none"
+                className=" text-[#7C8DB0] border border-[#light-grey] p-2 rounded outline-none w-full minimal:w-auto"
                 value={suffix}
                 onChange={(e) => setSuffix(e.target.value)}
               />
               <input
                 type="date"
                 placeholder="Date of birth*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.dateOfBirth ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={dateOfBirth}
@@ -217,11 +216,11 @@ export default function PersonInformation() {
           </div>
 
           <div className=" flex flex-col gap-4">
-            <div className=" flex gap-6">
+            <div className=" flex gap-6 flex-wrap">
               <input
                 type="email"
                 placeholder="Email address*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.email ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={email}
@@ -231,18 +230,18 @@ export default function PersonInformation() {
                 type="tel"
                 inputMode="tel"
                 placeholder="Phone number*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.phoneNumber ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
             </div>
-            <div className=" flex gap-6">
+            <div className=" flex gap-6 flex-wrap">
               <input
                 type="text"
                 placeholder="Redress number"
-                className="text-[#7C8DB0] border border-[#light-grey] p-2 rounded w-[300px] outline-none"
+                className="text-[#7C8DB0] border border-[#light-grey] p-2 rounded clas:w-[300px] outline-none w-full minimal:w-auto"
                 value={redressNumber}
                 onChange={(e) => setRedressNumber(e.target.value)}
               />
@@ -250,7 +249,7 @@ export default function PersonInformation() {
                 type="tel"
                 inputMode="tel"
                 placeholder="Known traveller number*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.knownTravelerNumber
                     ? "border-red-500"
                     : "border-[#light-grey]"
@@ -273,11 +272,11 @@ export default function PersonInformation() {
             <span>Same as Passenger 1</span>
           </label>
           <div className=" flex flex-col gap-4">
-            <div className=" flex gap-6">
+            <div className=" flex gap-6 flex-wrap">
               <input
                 type="text"
                 placeholder="First name*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.emergencyFirstName ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={emergencyFirstName}
@@ -287,7 +286,7 @@ export default function PersonInformation() {
               <input
                 type="text"
                 placeholder="Last name*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.emergencyLastName ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={emergencyLastName}
@@ -295,11 +294,11 @@ export default function PersonInformation() {
                 disabled={autofillEmergencyContact}
               />
             </div>
-            <div className=" flex gap-6">
+            <div className=" flex gap-6 flex-wrap">
               <input
                 type="email"
                 placeholder="Email address*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.emergencyEmail ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={emergencyEmail}
@@ -310,7 +309,7 @@ export default function PersonInformation() {
                 type="tel"
                 inputMode="tel"
                 placeholder="Phone number*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
                   errors.emergencyPhoneNumber ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={emergencyPhoneNumber}
@@ -328,7 +327,7 @@ export default function PersonInformation() {
             <span className=" text-mainC">full bag policy.</span>
           </p>
 
-          <div className=" text-light-grey flex flex-col gap-2">
+          <div className=" text-light-grey flex flex-col gap-2 mb-2">
             <h3>Checked bags:</h3>
             <div className=" flex gap-2">
               <button
@@ -364,8 +363,8 @@ export default function PersonInformation() {
         </div>
 
         {/* right section flight picked */}
-        <div className=" text-gray-900 flex flex-col gap-5 font-medium">
-          <div className=" flex gap-8 border p-4 rounded-lg">
+        <div className=" text-gray-900 flex flex-col gap-5 font-medium items-start ">
+          <div className=" flex flex-wrap gap-8 border p-4 rounded-lg">
             <img
               src={pickedFlightFromPreviousPage.img}
               alt="picked flight image"
@@ -373,7 +372,7 @@ export default function PersonInformation() {
             />
             <h3>{pickedFlightFromPreviousPage.companyTitle}</h3>
 
-            <div className=" flex flex-col gap-2 justify-between">
+            <div className=" flex  small:flex-col gap-2 justify-between">
               <p className=" self-end">
                 {pickedFlightFromPreviousPage.duration}
               </p>
@@ -384,7 +383,7 @@ export default function PersonInformation() {
             </div>
           </div>
 
-          <div className=" self-end flex flex-col items-end gap-3">
+          <div className=" self-start clas:self-end flex flex-col items-end gap-3">
             <div className=" flex gap-10">
               <h3>Subtotal</h3>
               <p>$503</p>
@@ -402,13 +401,13 @@ export default function PersonInformation() {
           </div>
 
           <button
-            className=" self-end px-5 py-2 bg-[#CBD4E6] text-light-grey border border-light-grey rounded-lg"
+            className=" self-start clas:self-end px-5 py-2 bg-[#CBD4E6] text-light-grey border border-light-grey rounded-lg"
             onClick={handleFormSubmit}
           >
             Select seats
           </button>
 
-          <img src={bagsImage} alt="" />
+          <img src={bagsImage} alt="" className=" hidden clas:block"/>
         </div>
       </section>
     </main>
