@@ -154,7 +154,7 @@ export default function PersonInformation() {
   };
 
   return (
-    <main className=" max-w-7xl m-auto mt-[100px] px-4 h-screen mb-[550px] minimal:mb-20">
+    <main className=" max-w-7xl m-auto mt-[100px] px-4 h-screen mb-[550px] small:mb-20">
       <h3 className=" text-mainC font-bold text-xl">Passenger information</h3>
       <p className=" text-gray-400 max-w-[680px]">
         Enter the required information for each traveler and be sure that it
@@ -172,7 +172,7 @@ export default function PersonInformation() {
               <input
                 type="text"
                 placeholder="First name*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.firstName ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={firstName}
@@ -181,14 +181,14 @@ export default function PersonInformation() {
               <input
                 type="text"
                 placeholder="Middle"
-                className=" text-[#7C8DB0] border border-[#light-grey] p-2 rounded outline-none w-full minimal:w-auto"
+                className=" text-[#7C8DB0] border border-[#light-grey] p-2 rounded outline-none w-full small:w-auto"
                 value={middleName}
                 onChange={(e) => setMiddleName(e.target.value)}
               />
               <input
                 type="text"
                 placeholder="Last name*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.lastName ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={lastName}
@@ -199,14 +199,14 @@ export default function PersonInformation() {
               <input
                 type="text"
                 placeholder="Suffix"
-                className=" text-[#7C8DB0] border border-[#light-grey] p-2 rounded outline-none w-full minimal:w-auto"
+                className=" text-[#7C8DB0] border border-[#light-grey] p-2 rounded outline-none w-full small:w-auto"
                 value={suffix}
                 onChange={(e) => setSuffix(e.target.value)}
               />
               <input
                 type="date"
                 placeholder="Date of birth*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.dateOfBirth ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={dateOfBirth}
@@ -220,7 +220,7 @@ export default function PersonInformation() {
               <input
                 type="email"
                 placeholder="Email address*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.email ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={email}
@@ -230,7 +230,7 @@ export default function PersonInformation() {
                 type="tel"
                 inputMode="tel"
                 placeholder="Phone number*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.phoneNumber ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={phoneNumber}
@@ -241,7 +241,7 @@ export default function PersonInformation() {
               <input
                 type="text"
                 placeholder="Redress number"
-                className="text-[#7C8DB0] border border-[#light-grey] p-2 rounded clas:w-[300px] outline-none w-full minimal:w-auto"
+                className="text-[#7C8DB0] border border-[#light-grey] p-2 rounded clas:w-[300px] outline-none w-full small:w-auto"
                 value={redressNumber}
                 onChange={(e) => setRedressNumber(e.target.value)}
               />
@@ -249,7 +249,7 @@ export default function PersonInformation() {
                 type="tel"
                 inputMode="tel"
                 placeholder="Known traveller number*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.knownTravelerNumber
                     ? "border-red-500"
                     : "border-[#light-grey]"
@@ -276,7 +276,7 @@ export default function PersonInformation() {
               <input
                 type="text"
                 placeholder="First name*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.emergencyFirstName ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={emergencyFirstName}
@@ -286,7 +286,7 @@ export default function PersonInformation() {
               <input
                 type="text"
                 placeholder="Last name*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.emergencyLastName ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={emergencyLastName}
@@ -298,7 +298,7 @@ export default function PersonInformation() {
               <input
                 type="email"
                 placeholder="Email address*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.emergencyEmail ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={emergencyEmail}
@@ -309,7 +309,7 @@ export default function PersonInformation() {
                 type="tel"
                 inputMode="tel"
                 placeholder="Phone number*"
-                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full minimal:w-auto ${
+                className={`text-[#7C8DB0] border p-2 rounded outline-none w-full small:w-auto ${
                   errors.emergencyPhoneNumber ? "border-red-500" : "border-[#light-grey]"
                 }`}
                 value={emergencyPhoneNumber}
