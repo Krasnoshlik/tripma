@@ -154,7 +154,7 @@ export default function PersonInformation() {
   };
 
   return (
-    <main className=" max-w-7xl m-auto mt-[100px] px-4 h-screen mb-[550px] small:mb-20">
+    <main className=" max-w-7xl m-auto mt-[100px] px-4 mb-20">
       <h3 className=" text-mainC font-bold text-xl">Passenger information</h3>
       <p className=" text-gray-400 max-w-[680px]">
         Enter the required information for each traveler and be sure that it
